@@ -28,19 +28,21 @@
 
   /* ── BRICK TEXTURE BACKGROUND ── */
   .brickBackground {
-    width: 100%; height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     color: var(--lego-red);
     background-color: currentColor;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px 12px;
     background-image:
-      radial-gradient(currentColor 7.5px, transparent 8.5px),
-      radial-gradient(rgba(255,255,255,0.6) 7.5px, transparent 8.5px),
-      radial-gradient(rgba(0,0,0,0.2) 7.5px, transparent 10.5px),
-      radial-gradient(rgba(0,0,0,0.2) 7.5px, transparent 10.5px);
+            radial-gradient(currentColor 7.5px, transparent 8.5px),
+            radial-gradient(rgba(255,255,255,0.6) 7.5px, transparent 8.5px),
+            radial-gradient(rgba(0,0,0,0.2) 7.5px, transparent 10.5px),
+            radial-gradient(rgba(0,0,0,0.2) 7.5px, transparent 10.5px);
     background-size: 27px 27px;
-    background-position: 0px 0px, -0.5px -0.5px, 0px 0px, 3px 3px;
+    background-position: 0 0, -0.5px -0.5px, 0 0, 3px 3px;
   }
 
   /* ── FALLING BRICKS RAIN ── */
@@ -77,14 +79,14 @@
     z-index: 10;
     background: var(--lego-yellow);
     border-radius: 24px;
-    padding: 28px 32px 36px;
-    max-width: 360px;
-    margin: auto;
+    padding: 24px 20px 30px;
+    max-width: 350px;
+    width: min(92vw, 350px);
     text-align: center;
     box-shadow:
-      0 0 0 6px var(--lego-dark),
-      0 12px 0 6px #8B7300,
-      0 20px 40px rgba(0,0,0,0.5);
+            0 0 0 6px var(--lego-dark),
+            0 12px 0 6px #8B7300,
+            0 20px 40px rgba(0,0,0,0.5);
     animation: cardPop 0.8s cubic-bezier(0.175,0.885,0.32,1.6) 0.3s both;
   }
 
@@ -204,7 +206,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 14px auto;
-    cursor: default;
+    cursor: pointer;
   }
 
   .bit {
@@ -253,6 +255,7 @@
     border-radius: 12px;
     border: 3px solid var(--lego-dark);
     margin-bottom: 18px;
+    box-sizing: border-box;
   }
 
   /* BUTTONS LEGO */
@@ -260,6 +263,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
+    align-items: start;
   }
 
   /* colori */
@@ -292,6 +296,34 @@
     font-size: 16px;
   }
 
+
+  @media (max-width: 600px) {
+    #card {
+      padding: 20px 16px 26px;
+      border-radius: 18px;
+    }
+
+    .party-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+    }
+
+    input {
+      font-size: 16px;
+      padding: 12px;
+    }
+
+    .bod {
+      padding: 12px 14px;
+      min-height: 50px;
+    }
+
+    .bod p {
+      font-size: 18px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -304,7 +336,7 @@
 <div id="card">
   <div class="party-label">Ci sarai?</div>
 
-  <input id="nome" placeholder="Nome e cognome"/>
+  <input id="nome" placeholder="Nome e Cognome"/>
 
   <div class="buttons">
       <div class="brick yes" onclick="sendReply('si')">
