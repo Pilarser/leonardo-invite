@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=1080, initial-scale=1.0"/>
+<title>Festa di Leonardo!</title>
+  <meta property="og:title" content="Festa di Leonardo!" />
+  <meta property="og:description" content="Sei invitato!" />
+  <meta property="og:image" content="https://Pilarser.github.io/leonardo-invite/images/preview.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --lego-red:    #E3000B;
+    --lego-yellow: #FFD700;
+    --lego-blue:   #006CB7;
+    --lego-green:  #00A650;
+    --lego-orange: #FF6B00;
+    --lego-white:  #FFFFFF;
+    --lego-dark:   #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Fredoka One', cursive;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    margin: 0; padding: 0;
+  }
+
+  /* ── BRICK TEXTURE BACKGROUND ── */
+  .brickBackground {
+    width: 100%; height: 100vh;
+    color: var(--lego-red);
+    background-color: currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      radial-gradient(currentColor 7.5px, transparent 8.5px),
+      radial-gradient(rgba(255,255,255,0.6) 7.5px, transparent 8.5px),
+      radial-gradient(rgba(0,0,0,0.2) 7.5px, transparent 10.5px),
+      radial-gradient(rgba(0,0,0,0.2) 7.5px, transparent 10.5px);
+    background-size: 27px 27px;
+    background-position: 0px 0px, -0.5px -0.5px, 0px 0px, 3px 3px;
+  }
+
+  /* ── FALLING BRICKS RAIN ── */
+  #brick-rain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .rain-brick-wrap {
+    position: absolute;
+    top: -80px;
+    opacity: 0;
+    animation: fall linear 1 forwards;
+  }
+  .rain-brick-wrap .brick { animation: none; }
+  .rain-brick-wrap .bod {
+    min-height: 0; padding: 0; height: 22px;
+    box-shadow: 0 4px 0 var(--bod-shadow), inset 0 2px 3px rgba(255,255,255,0.2);
+  }
+  .rain-brick-wrap .bit { height: 10px; width: 65%; }
+
+  @keyframes fall {
+    0%   { transform: translateY(0)     rotate(var(--rot-start)); opacity: 0; }
+    6%   { opacity: 0.88; }
+    92%  { opacity: 0.88; }
+    100% { transform: translateY(115vh) rotate(var(--rot-end));   opacity: 0; }
+  }
+
+  /* ── MAIN CARD ── */
+  #card {
+    position: relative;
+    z-index: 10;
+    background: var(--lego-yellow);
+    border-radius: 24px;
+    padding: 28px 32px 36px;
+    max-width: 480px;
+    width: 92vw;
+    text-align: center;
+    box-shadow:
+      0 0 0 6px var(--lego-dark),
+      0 12px 0 6px #8B7300,
+      0 20px 40px rgba(0,0,0,0.5);
+    animation: cardPop 0.8s cubic-bezier(0.175,0.885,0.32,1.6) 0.3s both;
+  }
+
+  @keyframes cardPop {
+    from { transform: scale(0.4) rotate(-6deg); opacity: 0; }
+    to   { transform: scale(1)   rotate(0deg);  opacity: 1; }
+  }
+
+  /* ── PARTY LABEL ── */
+  .party-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: var(--lego-red);
+    color: white;
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 0 #8B0009;
+    animation: slideDown 0.5s ease 1s both;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAME LOGO IMAGE ── */
+  .name-logo {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    display: block;
+    margin: 0 auto 16px;
+    animation: nameReveal 0.7s cubic-bezier(0.175,0.885,0.32,1.4) 1.2s both;
+  }
+
+  @keyframes nameReveal {
+    from { opacity: 0; transform: scale(1.4); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── EMMET IMAGE ── */
+  .emmet-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    animation: slideUp 0.5s ease 1.4s both;
+    border-radius: 10px;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── INFO GRID ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+    animation: slideUp 0.5s ease 1.8s both;
+  }
+
+  .info-block {
+    background: white;
+    border-radius: 14px;
+    padding: 12px 10px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15), 0 0 0 2px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+
+  .info-block.date::before  { background: var(--lego-red); }
+  .info-block.time::before  { background: var(--lego-blue); }
+  .info-block.place::before { background: var(--lego-green); }
+  .info-block.place { grid-column: 1 / -1; }
+
+  .info-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    display: block;
+    margin-bottom: 2px;
+    margin-top: 8px;
+  }
+
+  .info-value {
+    font-family: 'Fredoka One', cursive;
+    font-size: 17px;
+    color: var(--lego-dark);
+    line-height: 1.2;
+  }
+
+  /* ── BRICK CTA BUTTON ── */
+  .lego {
+    display: grid;
+    margin: auto;
+    animation: slideUp 0.5s ease 2.2s both;
+  }
+
+  .brick {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 14px auto;
+    cursor: default;
+  }
+
+  .bit {
+    align-self: flex-end;
+    justify-self: center;
+    width: 70%;
+    height: 14px;
+    background-color: var(--lego-red);
+    border-top-left-radius: 40%;
+    border-top-right-radius: 40%;
+    box-shadow: inset 0 2px 3px rgba(255,255,255,0.3), inset -1px 0 2px rgba(0,0,0,0.1);
+    filter: brightness(1.08);
+  }
+
+  .bod {
+    grid-column: 1 / 5;
+    background-color: var(--lego-red);
+    border-radius: 6px;
+    padding: 14px 20px;
+    box-shadow:
+      0 6px 0 #8B0009,
+      0 8px 0 rgba(0,0,0,0.2),
+      0 0 0 3px var(--lego-dark),
+      inset 0 2px 3px rgba(255,255,255,0.2),
+      inset 0 -2px 3px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+  }
+
+  .bod p {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    color: white;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    margin: 0; line-height: 1;
+  }
+</style>
+</head>
+<body>
+<div class="brickBackground">
+
+<!-- BRICK RAIN -->
+<div id="brick-rain"></div>
+
+<!-- INVITE CARD -->
+<div id="card">
+  <div class="party-label">Sei invitato!</div>
+
+  <img class="name-logo" src="images/leonardo.png" alt="Leonardo" />
+
+  <img src="images/emmet.png" alt="Emmet e numero 4" class="emmet-img">
+  <div class="info-grid">
+    <div class="info-block date">
+      <span class="info-label">Quando</span>
+      <div class="info-value">23 Maggio 2026</div>
+    </div>
+    <div class="info-block time">
+      <span class="info-label">Ora</span>
+      <div class="info-value">Alle 10:00</div>
+    </div>
+    <div class="info-block place">
+      <span class="info-label">Dove</span>
+      <div class="info-value">Oratorio di San Gaetano, via Duprè 19</div>
+    </div>
+  </div>
+  <a href="rsvp.html" style="text-decoration:none;">
+    <div class="lego">
+      <div class="brick">
+        <div class="bit"></div>
+        <div class="bit"></div>
+        <div class="bit"></div>
+        <div class="bit"></div>
+        <div class="bod"><p>Ti aspetto!</p></div>
+      </div>
+    </div>
+  </a>
+
+</div>
+</div>
+
+<script>
+// ── BRICK RAIN ──
+const RAIN_PALETTE = [
+  { color: '#E3000B', shadow: '#8B0009' },
+  { color: '#FFD700', shadow: '#A07E00' },
+  { color: '#006CB7', shadow: '#003D7A' },
+  { color: '#00A650', shadow: '#005C27' },
+  { color: '#FF6B00', shadow: '#9E4800' },
+  { color: '#F8F4EC', shadow: '#B0ACA4' },
+];
+const rain = document.getElementById('brick-rain');
+
+function makeRainBrick() {
+  const palette  = RAIN_PALETTE[Math.floor(Math.random() * RAIN_PALETTE.length)];
+  const numStuds = Math.ceil(Math.random() * 4);
+  const brickW   = numStuds * 28;
+  const left     = Math.random() * 95;
+  const duration = 4.5 + Math.random() * 5;
+  const rotStart = (Math.random() * 30 - 15).toFixed(1) + 'deg';
+  const rotEnd   = (Math.random() * 30 - 15).toFixed(1) + 'deg';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'rain-brick-wrap';
+  wrap.style.cssText = `left:${left}vw; --rot-start:${rotStart}; --rot-end:${rotEnd}; --bod-shadow:${palette.shadow}; animation-duration:${duration}s; width:${brickW}px;`;
+
+  const brick = document.createElement('div');
+  brick.className = 'brick';
+  brick.style.gridTemplateColumns = `repeat(${numStuds}, 1fr)`;
+
+  for (let i = 0; i < numStuds; i++) {
+    const bit = document.createElement('div');
+    bit.className = 'bit';
+    bit.style.backgroundColor = palette.color;
+    brick.appendChild(bit);
+  }
+
+  const bod = document.createElement('div');
+  bod.className = 'bod';
+  bod.style.cssText = `grid-column:1/${numStuds+1}; background-color:${palette.color};`;
+  brick.appendChild(bod);
+
+  wrap.appendChild(brick);
+  rain.appendChild(wrap);
+  setTimeout(() => wrap.remove(), (duration + 0.5) * 1000);
+}
+
+for (let i = 0; i < 18; i++) setTimeout(makeRainBrick, i * 280);
+setInterval(makeRainBrick, 380);
+</script>
+</div>
+</body>
+</html>
