@@ -111,8 +111,8 @@
   /* ── PARTY LABEL ── */
   .party-label {
     font-family: 'Fredoka One', cursive;
-    font-size: 13px;
-    letter-spacing: 4px;
+    font-size: 12px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     background: var(--lego-red);
     color: white;
@@ -122,6 +122,17 @@
     margin-bottom: 14px;
     box-shadow: 0 3px 0 #8B0009;
     animation: slideDown 0.5s ease 1s both;
+  }
+
+  .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--lego-dark);
+    margin-bottom: 6px;
+    opacity: 0.8;
   }
 
   @keyframes slideDown {
@@ -314,8 +325,7 @@
 
 <!-- INVITE CARD -->
 <div id="card">
-  <div class="party-label">Sei invitato!</div>
-
+  <div class="party-label">Sei invitato al compleanno di</div>
   <img class="name-logo" src="images/leonardo.png" alt="Leonardo" />
 
   <img src="images/emmet.png" alt="Emmet e numero 4" class="emmet-img">
@@ -325,7 +335,7 @@
       <div class="info-value">23 Maggio 2026</div>
     </div>
     <div class="info-block time">
-      <span class="info-label">Ora</span>
+      <span class="info-label">A che ora</span>
       <div class="info-value">Alle 10:00</div>
     </div>
     <div class="info-block place">
